@@ -20,7 +20,7 @@ $kubectl get leases -ojson | grep holder
                 "holderIdentity": "leases",
 ...
 
-$ get leases -ojson | grep holder | grep leases  | wc -l
+$kubectl get leases -ojson | grep holder | grep leases  | wc -l
 110
 
 
@@ -45,6 +45,10 @@ $kubectl get leases -ojson | grep holder
                 "holderIdentity": "",
                 "holderIdentity": "leases",
 ...
+
+$ kubectl get po
+No resources found in default namespace.
+
 $ kubectl get leases -ojson | grep holder | grep leases  | wc -l
 19
 

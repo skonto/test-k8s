@@ -28,8 +28,10 @@ func main() {
 	}
 	client := clientset.NewForConfigOrDie(config)
 	ctx := signals.NewContext()
+
 	eg, egCtx := errgroup.WithContext(ctx)
-	for i := range 10 {
+
+	for i := range 110 {
 		lock := &resourcelock.LeaseLock{
 			LeaseMeta: metav1.ObjectMeta{
 				Name:      fmt.Sprintf("lease-%d", i),
@@ -61,7 +63,6 @@ func main() {
 	}
 
 	<-egCtx.Done()
-	time.Sleep(5 * time.Second) // without this nothing is cleaned up, comment out and check
 
-	//select {} // works and leases are cleaned up
+	_ = eg.Wait()
 }
